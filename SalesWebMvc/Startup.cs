@@ -41,8 +41,9 @@ namespace SalesWebMvc
                     options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), Builder =>//Adicionando o provider do MySql para as migrations
                         Builder.MigrationsAssembly("SalesWebMvc")));
             
-            services.AddScoped<SeedingService>(); //Adicionando SeedingService para registrar no sistema de injeção de depência da aplicação
-            services.AddScoped<SellerService>();
+            services.AddScoped<SeedingService>(); //Adicionando SeedingService para registrar no sistema de injeção de depência da aplicação em outras classes
+            services.AddScoped<SellerService>(); //Adicionando SellerService para registrar no sistema de injeção de dependência da aplicação em outras classes
+            services.AddScoped<DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
