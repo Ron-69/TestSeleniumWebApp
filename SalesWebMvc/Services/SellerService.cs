@@ -15,7 +15,7 @@ namespace SalesWebMvc.Services
             _context = context;
         }
 
-        public List<Seller> FindAll() //Opereção para acessar a fonte de dados relacionada a tabela de vendedores e converter para lista
+        public List<Seller> FindAll() //Opereção para acessar a fonte de dados relacionada a tabela de vendedores e converter para lista -Modificação
         {
             return _context.Seller.ToList();
         }
