@@ -35,6 +35,14 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken] //Evita que sofra ataques de CSRF
         public IActionResult Create(Seller seller)
         {
+            //Esse blocovê se o modelo não foi validado e retorna a mesma view - volta e acaba de completar
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+            // fim do bloco
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index)); //redireciona o retorno para o Index
         }
@@ -103,6 +111,15 @@ namespace SalesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id,  Seller seller)
         {
+            //Bloco que vê se o modelo foi validade e se não foi ele retrona a mesma view até ser preenchida corretamente
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+            //fim do bloco
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
